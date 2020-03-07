@@ -4,6 +4,9 @@ import axios from 'axios';
 import styled from 'styled-components';
 import './App.css';
 
+// Components
+import Character from './components/Character';
+
 //Styles
 const PersonContainer = styled.div`
 	border: 1px solid #ff0000;
@@ -12,6 +15,8 @@ const PersonContainer = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	margin: 0 auto;
+	background-color: rgba(255, 255, 255, 0.6);
 `;
 const App = props => {
 	// Try to think through what state you'll need for this app before starting. Then build out
@@ -35,7 +40,7 @@ const App = props => {
 			<h1 className="Header">React Wars</h1>
 			<div className="wrapper">
 				{people.map(person => {
-					console.log(person.name);
+					// console.log(person.name);
 					return <PersonContainer>{person.name}</PersonContainer>;
 				})}
 			</div>
