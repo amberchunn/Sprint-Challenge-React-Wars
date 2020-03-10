@@ -8,24 +8,27 @@ import './App.css';
 import Character from './components/Character';
 
 //Styles
+
 const PersonContainer = styled.div`
-	border: 1px solid #ff0000;
-	max-width: 50%;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+	max-width: 960px;
 	margin: 0 auto;
 	background-color: rgba(255, 255, 255, 0.6);
+	display: inline-flex;
+	justify-content: space-between;
+	align-items: center;
 `;
+
 const App = props => {
 	// Try to think through what state you'll need for this app before starting. Then build out
 	// the state properties here.
+
 	const [people, setPeople] = useState([]);
+	// const [image, setImage] = useState({});
 
 	// Fetch characters from the star wars api in an effect hook. Remember, anytime you have a
 	// side effect in a component, you want to think about which state and/or props it should
 	// sync up with, if any.
+
 	useEffect(() => {
 		axios
 			.get('https://swapi.co/api/people/')
@@ -35,13 +38,33 @@ const App = props => {
 			.catch(`These aren't the droids you are looking for.`);
 	}, []);
 
+	// useEffect(() => {
+	// 	axios
+	// 		.get('http://intergalacticdb.me/api/characters?name=&image=')
+	// 		.then(res => {
+	// 			setImage(res.data);
+	// 		})
+	// 		.catch(`These aren't the droids you are looking for.`);
+	// }, []);
+
+	// console.log(image);
+
 	return (
 		<div className="App">
 			<h1 className="Header">React Wars</h1>
 			<div className="wrapper">
 				{people.map(person => {
-					// console.log(person.name);
-					return <PersonContainer>{person.name}</PersonContainer>;
+					return (
+						<PersonContainer>
+							<Character
+								name={person.name}
+								hair_color={person.hair_color}
+								eye_color={person.eye_color}
+								skin_color={person.skin_color}
+								birth_year={person.birth_year}
+							/>
+						</PersonContainer>
+					);
 				})}
 			</div>
 		</div>
